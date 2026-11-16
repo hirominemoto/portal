@@ -9,7 +9,7 @@
   :root{
     --bg0:#070b16; --bg1:#0d1428; --bg2:#121c38;
     --ink:#eef2ff; --sub:#9fb0d6;
-    --work:#6ea8ff; --tool:#6ee7a8; --trip:#ffb86b; --think:#c6a0ff; --ai:#7fe3ff;
+    --work:#6ea8ff; --tool:#6ee7a8; --trip:#ffb86b; --think:#c6a0ff; --ai:#7fe3ff; --art:#ff9ec7;
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   html,body{margin:0;padding:0}
@@ -58,8 +58,8 @@
     -webkit-user-select:none;user-select:none}
   .card .ic{font-size:26px;display:block;margin-bottom:9px;
     filter:drop-shadow(0 0 8px var(--c))}
-  .card .nm{font-size:15px;font-weight:700;letter-spacing:.02em}
-  .card .ds{margin-top:4px;font-size:11.5px;line-height:1.5;color:var(--sub)}
+  .card .nm{display:block;font-size:15px;font-weight:700;letter-spacing:.02em}
+  .card .ds{display:block;margin-top:5px;font-size:11px;line-height:1.5;color:var(--sub)}
   .card .glow{position:absolute;inset:-40% -40% auto auto;width:120px;height:120px;border-radius:50%;
     background:var(--c);filter:blur(34px);opacity:.0;transition:opacity .35s}
   .card:active{transform:scale(.97)}
@@ -68,9 +68,9 @@
   .card:hover .glow{opacity:.5}
   /* ジャンル別アクセント */
   .work .card{--c:var(--work)} .tool .card{--c:var(--tool)}
-  .trip .card{--c:var(--trip)} .think .card{--c:var(--think)} .ai .card{--c:var(--ai)}
+  .trip .card{--c:var(--trip)} .think .card{--c:var(--think)} .ai .card{--c:var(--ai)} .art .card{--c:var(--art)}
   .work h2,.work .em{color:var(--work)} .tool h2,.tool .em{color:var(--tool)}
-  .trip h2,.trip .em{color:var(--trip)} .think h2,.think .em{color:var(--think)} .ai h2,.ai .em{color:var(--ai)}
+  .trip h2,.trip .em{color:var(--trip)} .think h2,.think .em{color:var(--think)} .ai h2,.ai .em{color:var(--ai)} .art h2,.art .em{color:var(--art)}
 
   footer{text-align:center;margin-top:46px;color:#6b7aa3;font-size:11px;letter-spacing:.05em}
   .hidden{display:none}
@@ -133,6 +133,19 @@
     <div class="grid">
       <a class="card" href="https://clinquant-tarsier-587976.netlify.app/"><span class="glow"></span><span class="ic">🪑</span><span class="nm">会議室</span><span class="ds">複数AIで会議する</span></a>
       <a class="card" href="https://manabiba-kotoba.mighty-eagle-3157.chatgpt.site/"><span class="glow"></span><span class="ic">📖</span><span class="nm">AI用語</span><span class="ds">AIの言葉をまなぶ</span></a>
+    </div>
+  </section>
+
+  <section class="art">
+    <div class="shead"><span class="em">✨</span><h2>みる・さくひん</h2><span class="line"></span></div>
+    <div class="grid">
+      <a class="card" href="https://hirominemoto.github.io/ookina-ki-no-mori/"><span class="glow"></span><span class="ic">🌲</span><span class="nm">おおきな木のある森</span><span class="ds">夜の森のたんぺん</span></a>
+      <a class="card" href="https://hirominemoto.github.io/gravity-shape/"><span class="glow"></span><span class="ic">🌀</span><span class="nm">重力のかたち</span><span class="ds">重力で宇宙を描く</span></a>
+      <a class="card" href="https://tokyo-tower-blond.vercel.app/"><span class="glow"></span><span class="ic">🗼</span><span class="nm">東京タワー</span><span class="ds">3Dの東京タワー</span></a>
+      <a class="card" href="https://hirominemoto.github.io/pechi-island/"><span class="glow"></span><span class="ic">🏝️</span><span class="nm">ペチ島（ゴゴ）</span><span class="ds">3Dのペチ島</span></a>
+      <a class="card" href="https://hirominemoto.github.io/pechi-iland/"><span class="glow"></span><span class="ic">🏝️</span><span class="nm">ペチ島（Astra）</span><span class="ds">べつバージョン</span></a>
+      <a class="card" href="https://pechi-sky-garden-sol61.mighty-eagle-3157.chatgpt.site"><span class="glow"></span><span class="ic">🌠</span><span class="nm">星雫の庭</span><span class="ds">星のしずくの庭</span></a>
+      <a class="card" href="https://hirominemoto.github.io/kuronuto-company/"><span class="glow"></span><span class="ic">🏢</span><span class="nm">クロヌート企業</span><span class="ds">クロの会社</span></a>
     </div>
   </section>
 
