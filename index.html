@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b1020">
+<title>ひろみの森</title>
+<style>
+  :root{
+    --bg0:#070b16; --bg1:#0d1428; --bg2:#121c38;
+    --ink:#eef2ff; --sub:#9fb0d6;
+    --work:#6ea8ff; --tool:#6ee7a8; --trip:#ffb86b; --think:#c6a0ff; --ai:#7fe3ff;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;
+    color:var(--ink);
+    background:radial-gradient(130% 90% at 50% -10%, #16213f 0%, var(--bg1) 42%, var(--bg0) 100%);
+    min-height:100vh; overflow-x:hidden; position:relative;
+  }
+  /* 降ってくる光の粒 */
+  .sky{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+  .mote{position:absolute;top:-10px;border-radius:50%;background:#ffe9b0;
+    opacity:0;filter:blur(.3px);animation:fall linear infinite}
+  @keyframes fall{
+    0%{transform:translateY(-10px) translateX(0);opacity:0}
+    10%{opacity:.9}
+    90%{opacity:.5}
+    100%{transform:translateY(102vh) translateX(16px);opacity:0}
+  }
+  .wrap{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:30px 18px 70px}
+  header{text-align:center;margin:18px 0 26px}
+  .title{font-size:30px;font-weight:800;letter-spacing:.06em;
+    text-shadow:0 0 22px rgba(255,210,130,.45)}
+  .title .leaf{filter:drop-shadow(0 0 10px rgba(255,200,120,.6))}
+  .tagline{margin-top:8px;color:var(--sub);font-size:13px;letter-spacing:.04em}
+  .clock{margin-top:14px;font-size:13px;color:var(--sub)}
+  .clock b{color:var(--ink);font-weight:700}
+
+  .search{display:flex;align-items:center;gap:8px;margin:22px auto 6px;max-width:360px;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+    border-radius:999px;padding:10px 16px;backdrop-filter:blur(6px)}
+  .search input{flex:1;background:none;border:none;outline:none;color:var(--ink);font-size:15px}
+  .search input::placeholder{color:#7284ac}
+
+  section{margin-top:30px}
+  .shead{display:flex;align-items:center;gap:10px;margin:0 2px 14px}
+  .shead .em{font-size:20px}
+  .shead h2{margin:0;font-size:16px;font-weight:700;letter-spacing:.06em}
+  .shead .line{flex:1;height:1px;background:linear-gradient(90deg,currentColor,transparent);opacity:.35}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .card{position:relative;display:block;text-decoration:none;color:var(--ink);
+    background:linear-gradient(160deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+    border:1px solid rgba(255,255,255,.1); border-radius:18px; padding:16px 14px 15px;
+    overflow:hidden; transition:transform .25s ease, box-shadow .35s ease, border-color .25s;
+    -webkit-user-select:none;user-select:none}
+  .card .ic{font-size:26px;display:block;margin-bottom:9px;
+    filter:drop-shadow(0 0 8px var(--c))}
+  .card .nm{font-size:15px;font-weight:700;letter-spacing:.02em}
+  .card .ds{margin-top:4px;font-size:11.5px;line-height:1.5;color:var(--sub)}
+  .card .glow{position:absolute;inset:-40% -40% auto auto;width:120px;height:120px;border-radius:50%;
+    background:var(--c);filter:blur(34px);opacity:.0;transition:opacity .35s}
+  .card:active{transform:scale(.97)}
+  .card:hover{transform:translateY(-4px);border-color:var(--c);
+    box-shadow:0 10px 30px -10px var(--c)}
+  .card:hover .glow{opacity:.5}
+  /* ジャンル別アクセント */
+  .work .card{--c:var(--work)} .tool .card{--c:var(--tool)}
+  .trip .card{--c:var(--trip)} .think .card{--c:var(--think)} .ai .card{--c:var(--ai)}
+  .work h2,.work .em{color:var(--work)} .tool h2,.tool .em{color:var(--tool)}
+  .trip h2,.trip .em{color:var(--trip)} .think h2,.think .em{color:var(--think)} .ai h2,.ai .em{color:var(--ai)}
+
+  footer{text-align:center;margin-top:46px;color:#6b7aa3;font-size:11px;letter-spacing:.05em}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+<div class="sky" id="sky"></div>
+<div class="wrap">
+  <header>
+    <div class="title"><span class="leaf">🌳</span> ひろみの森</div>
+    <div class="tagline">つくったアプリが、一本ずつ木になって生えている</div>
+    <div class="clock" id="clock"></div>
+  </header>
+
+  <div class="search">
+    <span>🔍</span>
+    <input id="q" type="search" placeholder="アプリをさがす…" autocomplete="off">
+  </div>
+
+  <section class="work">
+    <div class="shead"><span class="em">💼</span><h2>しごと</h2><span class="line"></span></div>
+    <div class="grid">
+      <a class="card" href="https://ambi-keiri.vercel.app/"><span class="glow"></span><span class="ic">🧮</span><span class="nm">アンビ経理</span><span class="ds">会社の経理</span></a>
+      <a class="card" href="https://selege-keiri.vercel.app/"><span class="glow"></span><span class="ic">📒</span><span class="nm">セレッジ経理</span><span class="ds">セレッジの経理</span></a>
+      <a class="card" href="https://claude-attendance-garden.mighty-eagle-3157.chatgpt.site/"><span class="glow"></span><span class="ic">🗓️</span><span class="nm">AI出勤簿</span><span class="ds">勤怠の記録</span></a>
+      <a class="card" href="https://hirominemoto.github.io/gantt-chart/"><span class="glow"></span><span class="ic">📊</span><span class="nm">ガントチャート</span><span class="ds">進捗をまとめて見る</span></a>
+    </div>
+  </section>
+
+  <section class="tool">
+    <div class="shead"><span class="em">🧰</span><h2>どうぐ</h2><span class="line"></span></div>
+    <div class="grid">
+      <a class="card" href="https://mojicount-1-0-5-214656138471.asia-south1.run.app/"><span class="glow"></span><span class="ic">🔢</span><span class="nm">文字数カウンター</span><span class="ds">文字を数える</span></a>
+      <a class="card" href="https://service-236172426623.us-west1.run.app/"><span class="glow"></span><span class="ic">💬</span><span class="nm">伝わるくん</span><span class="ds">伝わる文章に整える</span></a>
+      <a class="card" href="https://tsumori-savings-282000122221.us-west1.run.app/"><span class="glow"></span><span class="ic">🐖</span><span class="nm">つもり貯金</span><span class="ds">つもりでためる</span></a>
+      <a class="card" href="https://luxury-lokum-f15664.netlify.app/"><span class="glow"></span><span class="ic">🩺</span><span class="nm">緊急ヘルスチェック</span><span class="ds">体調をたしかめる</span></a>
+    </div>
+  </section>
+
+  <section class="trip">
+    <div class="shead"><span class="em">🧭</span><h2>たび・あそび</h2><span class="line"></span></div>
+    <div class="grid">
+      <a class="card" href="https://hirominemoto.github.io/edo-wallet/"><span class="glow"></span><span class="ic">💰</span><span class="nm">江戸の財布</span><span class="ds">今の値段を江戸の物価に</span></a>
+      <a class="card" href="https://strong-piroshki-b63015.netlify.app/#home"><span class="glow"></span><span class="ic">🏯</span><span class="nm">東海道旅帖</span><span class="ds">東海道を歩く旅の帖</span></a>
+      <a class="card" href="https://aiwalkerapp-6eagu7rx.manus.space/"><span class="glow"></span><span class="ic">🚶</span><span class="nm">AIウォーカー</span><span class="ds">歩きのおとも</span></a>
+    </div>
+  </section>
+
+  <section class="think">
+    <div class="shead"><span class="em">🌙</span><h2>かんがえる・きろく</h2><span class="line"></span></div>
+    <div class="grid">
+      <a class="card" href="https://thinking-drive.vercel.app/"><span class="glow"></span><span class="ic">🚗</span><span class="nm">思考ドライブ</span><span class="ds">思考のギアを切り替える</span></a>
+      <a class="card" href="https://cheery-yeot-d31a3a.netlify.app/"><span class="glow"></span><span class="ic">💤</span><span class="nm">夢ノート</span><span class="ds">見た夢を書きとめる</span></a>
+      <a class="card" href="https://hirominemoto.github.io/-translation/"><span class="glow"></span><span class="ic">🔧</span><span class="nm">AI感情翻訳</span><span class="ds">すれ違いを障害レポートに</span></a>
+    </div>
+  </section>
+
+  <section class="ai">
+    <div class="shead"><span class="em">🤖</span><h2>AIと</h2><span class="line"></span></div>
+    <div class="grid">
+      <a class="card" href="https://clinquant-tarsier-587976.netlify.app/"><span class="glow"></span><span class="ic">🪑</span><span class="nm">会議室</span><span class="ds">複数AIで会議する</span></a>
+      <a class="card" href="https://manabiba-kotoba.mighty-eagle-3157.chatgpt.site/"><span class="glow"></span><span class="ic">📖</span><span class="nm">AI用語</span><span class="ds">AIの言葉をまなぶ</span></a>
+    </div>
+  </section>
+
+  <p id="empty" class="hidden" style="text-align:center;color:var(--sub);margin-top:30px">みつからなかった…</p>
+
+  <footer>made with ライト（Opus 4.8）× ひろみ 🌲</footer>
+</div>
+
+<script>
+  // 光の粒
+  const sky=document.getElementById('sky');
+  for(let i=0;i<34;i++){
+    const m=document.createElement('div');m.className='mote';
+    const s=1+Math.random()*3;
+    m.style.width=m.style.height=s+'px';
+    m.style.left=Math.random()*100+'vw';
+    m.style.animationDuration=(7+Math.random()*9)+'s';
+    m.style.animationDelay=(-Math.random()*12)+'s';
+    if(Math.random()>.6)m.style.background='#bfe0ff';
+    sky.appendChild(m);
+  }
+  // 時計
+  const clock=document.getElementById('clock');
+  function tick(){
+    const d=new Date();
+    const w=['日','月','火','水','木','金','土'][d.getDay()];
+    const hh=String(d.getHours()).padStart(2,'0');
+    const mm=String(d.getMinutes()).padStart(2,'0');
+    clock.innerHTML=`${d.getMonth()+1}月${d.getDate()}日(${w}) <b>${hh}:${mm}</b>`;
+  }
+  tick();setInterval(tick,10000);
+  // 検索
+  const q=document.getElementById('q'), empty=document.getElementById('empty');
+  q.addEventListener('input',()=>{
+    const v=q.value.trim().toLowerCase();let hit=0;
+    document.querySelectorAll('.card').forEach(c=>{
+      const t=c.textContent.toLowerCase();
+      const show=!v||t.includes(v);
+      c.style.display=show?'':'none';if(show)hit++;
+    });
+    document.querySelectorAll('section').forEach(s=>{
+      const any=[...s.querySelectorAll('.card')].some(c=>c.style.display!=='none');
+      s.style.display=any?'':'none';
+    });
+    empty.classList.toggle('hidden',hit>0);
+  });
+</script>
+</body>
+</html>
